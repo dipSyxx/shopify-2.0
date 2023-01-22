@@ -5,7 +5,7 @@ export default function Document() {
     <Html>
       <Head>
         <title>Shopify</title>
-        <script src="https://kit.fontawesome.com/699e6f5ea8.js" crossOrigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/699e6f5ea8.js" crossOrigin="true" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
         <link
