@@ -1,0 +1,107 @@
+.header_block
+  display: flex
+  justify-content: space-between
+  align-items: center
+  height: 40px
+  margin-bottom: 50px
+
+.header_logo
+  display: flex
+  align-items: center
+  justify-content: space-between
+  & img
+    vertical-align: middle
+    margin-right: 15px
+
+.header_title
+  font-size: 50px
+  color: #a2c752
+  font-weight: 700
+  margin-top: 6px
+
+.input_block
+  position: relative
+  & i
+    position: absolute
+    z-index: 2
+    top: 13px
+    left: 9px
+    color: #fff
+  & i:last-child
+    position: absolute
+    display: flex
+    align-items: center
+    z-index: 2
+    left: 93%
+    top: 2px
+    color: #fff
+    font-size: 16px
+    cursor: pointer
+    width: 16px
+    height: 37px
+    &:hover
+      color: rgba(119, 119, 119, 0.529)
+
+.search_input
+  border: 0
+  outline: none
+  padding: 10px 20px 10px 30px
+  height: 40px
+  border-radius: 10px
+  background: #a2c752
+  border: 1px solid #90ac53
+  color: #fff
+  font-size: 16px
+  transition: all 0.3s ease
+  &::placeholder
+    color: #fff
+  &:focus
+    border: 1px solid #000
+    box-shadow: 0px 0px 15px 5px rgba(162, 199, 82, 0.429)
+
+.cart_block
+  display: flex
+  flex-shrink: 0
+  align-items: center
+  padding: 0 30px
+  height: 40px
+  background-color: #a2c752
+  color: #fff
+  border-radius: 20px
+  transition: all 0.3s ease
+  &:hover
+    transform: scale(1.05)
+
+.cart_balance
+  font-weight: 700
+  & span
+    margin-left: 3px
+
+.cart_line
+  margin: 0 6px
+  border: 0
+  background-color: #fff
+  width: 20px
+  height: 1px
+  transform: rotate(90deg)
+
+.cart_shop
+  display: flex
+  align-items: center
+
+.cart_shop span
+  margin-left: 10px
+  background-color: #90ac53
+  border-radius: 50%
+  padding: 4px 7px
+  font-size: 12px
+
+.cart_shop i
+  font-size: 16px
+
+@media( max-width: 915px  )
+  .header_block
+    flex-direction: column
+    height: auto
+    margin-bottom: 40px
+    gap: 20px

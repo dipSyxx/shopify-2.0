@@ -1,0 +1,81 @@
+.category
+  padding-top: 50px
+  border-top: 1px solid rgba(119, 119, 119, 0.200)
+  display: flex
+  align-items: center
+  justify-content: space-between
+  gap: 20px
+
+.category_block
+  display: flex
+  align-items: center
+  gap: 20px
+  flex-wrap: wrap
+  & li
+    font-size: 16px
+    border: 1px solid #a2c752
+    color: #000
+    padding: 10px
+    border-radius: 15px
+    cursor: pointer
+    transition: all 0.3s ease
+    &.active
+      color: #fff
+      background-color: #a2c752
+    &:hover
+      background-color: #a2c752
+      color: #fff
+
+.sort
+  display: flex
+  position: relative
+
+.sort_label
+  display: flex
+  flex-shrink: 0
+  align-items: center
+  font-size: 16px
+  i
+    font-size: 12px
+    margin-right: 3px
+  p
+    margin-right: 5px
+  span
+    font-size: 17px
+    color: #a2c752
+    border-bottom: 1px dashed #a2c752
+    cursor: pointer
+
+.sort_popup
+  position: absolute
+  right: 0
+  margin-top: 30px
+  background: #ffffff
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.09)
+  border-radius: 10px
+  overflow: hidden
+  padding: 10px 0
+  width: 100%
+  z-index: 10
+
+.popup_block
+  overflow: hidden
+  li
+    padding: 12px 20px
+    cursor: pointer
+    &.active,
+    &:hover
+      background: rgba(162, 199, 82, 0.303)
+      &.active
+        font-weight: bold
+        color: #a2c752
+
+.category_title
+  margin-top: 30px
+  font-size: 30px
+  margin-bottom: 30px
+
+@media( max-width: 800px  )
+  .category
+    flex-direction: column-reverse
+    align-items: flex-start
