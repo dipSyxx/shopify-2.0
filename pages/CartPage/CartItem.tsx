@@ -70,3 +70,5 @@ export const CartItem = ({ id, title, image, price, rating, count }: CartItemPro
     </>
   )
 }
+
+export default CartItem

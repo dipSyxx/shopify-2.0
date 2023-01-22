@@ -16,3 +16,5 @@ export const EmptyCart = () => {
     </div>
   )
 }
+
+export default EmptyCart
