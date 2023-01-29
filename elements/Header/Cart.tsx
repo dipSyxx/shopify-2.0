@@ -2,9 +2,10 @@ import React from 'react'
 import styles from './Header.module.sass'
 import Link from 'next/link'
 import { useSelector } from 'react-redux'
+import { selectCart } from 'redux/slices/cartSlice'
 
 export const Cart = () => {
-  const { totalPrice, items }: any = useSelector<any>((state) => state.cart)
+  const { totalPrice, items }: any = useSelector<any>(selectCart)
 
   const totalCount = items.reduce((sum: any, item: { count: any }) => sum + item.count, 0)
   return (

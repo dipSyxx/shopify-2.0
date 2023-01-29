@@ -4,11 +4,11 @@ import styles from '../index.module.sass'
 import Link from 'next/link'
 import { CartItem } from './CartItem'
 import { useDispatch, useSelector } from 'react-redux'
-import { clearItems } from 'redux/slices/cartSlice'
+import { clearItems, selectCart } from 'redux/slices/cartSlice'
 import { EmptyCart } from './EmptyCart'
 
 export const CartPage = () => {
-  const { totalPrice, items }: any = useSelector<any>((state) => state.cart)
+  const { totalPrice, items }: any = useSelector<any>(selectCart)
   const dispatch = useDispatch()
 
   const totalCount = items.reduce((sum: any, item: { count: any }) => sum + item.count, 0)

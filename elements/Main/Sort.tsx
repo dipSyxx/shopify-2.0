@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import styles from './Catalog.module.sass'
 import clsx from 'clsx'
 import { useDispatch, useSelector } from 'react-redux'
-import { setSort } from 'redux/slices/filterSlice'
+import { selectFilterSort, setSort } from 'redux/slices/filterSlice'
 
 export const sortItem = [
   { name: 'popularity', sortProperty: 'rating' },
@@ -16,7 +16,7 @@ type PopupClick = MouseEvent & {
 
 export const Sort = () => {
   const dispatch = useDispatch()
-  const sort: any = useSelector<any>((state) => state.filter.sort)
+  const sort: any = useSelector<any>(selectFilterSort)
   const sortRef = useRef<HTMLDivElement>(null)
 
   const [sortPopOpen, setSortPopOpen] = useState(false)

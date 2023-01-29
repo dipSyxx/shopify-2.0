@@ -6,16 +6,16 @@ import { Products } from 'elements/Main/Products'
 import Skeleton from 'elements/Skeleton/Skeleton'
 import { Pagination } from 'elements/Pagination/Pagination'
 import { useDispatch, useSelector } from 'react-redux'
-import { setCategoryId, setCurrentPage, setFilters } from 'redux/slices/filterSlice'
-import { fetchProducts } from 'redux/slices/productSlice'
+import { selectFilter, setCategoryId, setCurrentPage, setFilters } from 'redux/slices/filterSlice'
+import { fetchProducts, selectProduct } from 'redux/slices/productSlice'
 import qs from 'qs'
 import { useRouter } from 'next/router'
 import { sortItem } from 'elements/Main/Sort'
 import { AppDispatch } from 'redux/store'
 
 export const Home = () => {
-  const { categoryId, sort, currentPage, searchValue }: any = useSelector<any>((state) => state.filter)
-  const { items, status }: any = useSelector<any>((state) => state.product)
+  const { categoryId, sort, currentPage, searchValue }: any = useSelector<any>(selectFilter)
+  const { items, status }: any = useSelector<any>(selectProduct)
 
   const dispatch = useDispatch<AppDispatch>()
   const router = useRouter()

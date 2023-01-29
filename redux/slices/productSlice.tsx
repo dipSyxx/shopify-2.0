@@ -60,6 +60,10 @@ export const ProductSlice = createSlice({
     },
   },
 })
+
+//! selectors
+export const selectProduct = (state: any) => state.product
+
 export const { setItems } = ProductSlice.actions
 
 export default ProductSlice.reducer
