@@ -43,7 +43,7 @@ export const CartPage = () => {
                 {items.map(
                   (
                     item: JSX.IntrinsicAttributes & {
-                      id: number
+                      id: string
                       title: string
                       price: number
                       image: string

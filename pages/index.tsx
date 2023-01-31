@@ -12,6 +12,7 @@ import qs from 'qs'
 import { useRouter } from 'next/router'
 import { sortItem } from 'elements/Main/Sort'
 import { AppDispatch } from 'redux/store'
+import { Loader } from 'elements/Loader/Loader'
 
 export const Home = () => {
   const { categoryId, sort, currentPage, searchValue }: any = useSelector<any>(selectFilter)
@@ -22,7 +23,7 @@ export const Home = () => {
   const isSearch = useRef(false)
   const isMounted = useRef(false)
 
-  const onClickCategoryId = useCallback((id: number) => {
+  const onClickCategoryId = useCallback((id: string) => {
     dispatch(setCategoryId(id))
   }, [])
 
@@ -87,7 +88,17 @@ export const Home = () => {
             Oops, failed to load products :(
           </h1>
         ) : (
-          <div className={styles.products_list}>{status === 'loading' ? skeleton : products}</div>
+          <div className={styles.products_list}>
+            {status === 'loading' ? (
+              <>
+                <Loader />
+                <Loader />
+                <Loader />
+              </>
+            ) : (
+              products
+            )}
+          </div>
         )}
 
         <Pagination currentPage={currentPage} onChangePage={onChangePage} />

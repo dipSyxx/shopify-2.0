@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import { CartItem as CartItemType } from 'redux/slices/cartSlice'
 
 type CartItemProps = {
-  id: number
+  id: string
   title: string
   price: number
   image: string

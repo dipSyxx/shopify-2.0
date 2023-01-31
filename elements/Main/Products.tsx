@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import styles from './ProductsStyle.module.sass'
 import { useDispatch, useSelector } from 'react-redux'
 import { CartItem, addItem } from 'redux/slices/cartSlice'
+import Link from 'next/link'
 
 export type CartItemProducts = {
-  id: number
+  id: string
   title: string
   price: number
   image: string
@@ -12,7 +13,7 @@ export type CartItemProducts = {
 }
 
 export const Products = ({ id, title, image, price, rating }: CartItemProducts) => {
-  const cartItem: any = useSelector<any>((state) => state.cart.items.find((obj: { id: number }) => obj.id === id))
+  const cartItem: any = useSelector<any>((state) => state.cart.items.find((obj: { id: string }) => obj.id === id))
   const dispatch = useDispatch()
 
   const addedCount = cartItem ? cartItem.count : 0
@@ -25,6 +26,7 @@ export const Products = ({ id, title, image, price, rating }: CartItemProducts) 
       image,
       rating,
       count: 0,
+      description: '',
     }
     dispatch(addItem(item))
   }
@@ -41,10 +43,13 @@ export const Products = ({ id, title, image, price, rating }: CartItemProducts) 
             {price} <span>$</span>
           </h3>
           <button onClick={onClickProductCount} className={styles.btn_add}>
-            <i className="fa-sharp fa-solid fa-bag-shopping"></i>Add{addedCount > 0 && <span>{addedCount}</span>}
+            <i className="fa-solid fa-cart-shopping" />
+            Buy{addedCount > 0 && <span>{addedCount}</span>}
           </button>
         </div>
-        <button className={styles.btn_detail}>Details</button>
+        <Link href={`/ProductDetail/${id}`}>
+          <button className={styles.btn_detail}>Details</button>
+        </Link>
       </div>
     </>
   )
