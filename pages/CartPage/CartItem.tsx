@@ -3,6 +3,7 @@ import React from 'react'
 import { MinusItem, removeItem, addItem } from 'redux/slices/cartSlice'
 import { useDispatch } from 'react-redux'
 import { CartItem as CartItemType } from 'redux/slices/cartSlice'
+import Link from 'next/link'
 
 type CartItemProps = {
   id: string
@@ -41,6 +42,9 @@ export const CartItem = ({ id, title, image, price, rating, count }: CartItemPro
     <>
       <li className="cart_list_product">
         <div className="product_preview">
+          <Link className="product_detail" href={`/ProductDetail/${id}`}>
+            <i className="fa-solid fa-circle-info" />
+          </Link>
           <div className="img">
             <img src={image} alt="cartProduct" />
           </div>
