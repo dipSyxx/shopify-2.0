@@ -1,12 +1,21 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './ProductDetailstyle.module.sass'
 import { Header } from 'elements/Header/Header'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import Link from 'next/link'
 import { Loader } from 'elements/Loader/Loader'
+import { useSelector } from 'react-redux'
 
-export const ProductDetail: FC = () => {
+type ProductDetailProps = {
+  title: string
+  description: string
+  price: number
+  image: string
+  rating: number
+}
+
+export const ProductDetail = ({ title, image, price, rating }: ProductDetailProps) => {
   //! CSR - Client-Side Rendering
   const [product, setProduct] = useState<{
     title: string
@@ -33,6 +42,10 @@ export const ProductDetail: FC = () => {
       fetchProduct()
     }
   }, [id])
+
+  const cartItem: any = useSelector<any>((state) => state.cart.items.find((obj: { id: string }) => obj.id === id))
+
+  const addedCount = cartItem ? cartItem.count : 0
 
   return (
     <>
@@ -82,10 +95,17 @@ export const ProductDetail: FC = () => {
                       {product?.price}
                       <span>$</span>
                     </div>
-                    <button className={styles.btn_buy}>
-                      <i className="fa-solid fa-cart-shopping" />
-                      Buy
-                    </button>
+                    {addedCount > 0 ? (
+                      <Link className={styles.into_cart} href="/CartPage/CartPage">
+                        <i className="fa-solid fa-basket-shopping" />
+                        In your cart{addedCount > 0 && <span>{addedCount}</span>}
+                      </Link>
+                    ) : (
+                      <Link href="/" className={styles.btn_buy}>
+                        <i className="fa-solid fa-cart-shopping" />
+                        Buy
+                      </Link>
+                    )}
                   </div>
                   <div className={styles.description_title}>Description</div>
                   <div className={styles.description_text}>{product?.description}</div>

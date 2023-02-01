@@ -8,8 +8,6 @@ import { useRouter } from 'next/router'
 
 export const Header = () => {
   const location = useRouter()
-
-  console.log(location)
   return (
     <>
       <header className={styles.header_block}>
