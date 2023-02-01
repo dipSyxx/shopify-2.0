@@ -94,6 +94,9 @@ export const Home = () => {
                 <Loader />
                 <Loader />
                 <Loader />
+                <Loader />
+                <Loader />
+                <Loader />
               </>
             ) : (
               products

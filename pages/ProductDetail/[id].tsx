@@ -68,7 +68,7 @@ export const ProductDetail: FC = () => {
               </div>
               <div className={styles.product_block}>
                 <div className={styles.product_img}>
-                  <img src={product?.image} alt="product" />
+                  <img src={product?.image} alt="product" width={350} height={350} />
                 </div>
                 <div className={styles.description_block}>
                   <div className={styles.available_block}>
