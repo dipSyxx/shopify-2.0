@@ -1,6 +1,4 @@
-import { Header } from 'elements/Header/Header'
 import React from 'react'
-import styles from '../index.module.sass'
 import Link from 'next/link'
 import { CartItem } from './CartItem'
 import { useDispatch, useSelector } from 'react-redux'
@@ -20,66 +18,63 @@ export const CartPage = () => {
   }
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.container}>
-        <Header />
-        {!totalPrice ? (
-          <EmptyCart />
-        ) : (
-          <div className="cart_with_products">
-            <div className="cart_with_inner">
-              <div className="cart_top">
-                <div className="cart_title">
-                  <i className="fa-solid fa-cart-shopping" />
-                  Cart
-                </div>
-                <div onClick={onClickClear} className="clear_cart">
-                  <i className="fa-solid fa-trash" />
-                  Clear cart
-                </div>
+    <>
+      {!totalPrice ? (
+        <EmptyCart />
+      ) : (
+        <div className="cart_with_products">
+          <div className="cart_with_inner">
+            <div className="cart_top">
+              <div className="cart_title">
+                <i className="fa-solid fa-cart-shopping" />
+                Cart
               </div>
-              <hr className="top_line" />
-              <ul className="cart_list_products">
-                {items.map(
-                  (
-                    item: JSX.IntrinsicAttributes & {
-                      id: string
-                      title: string
-                      price: number
-                      image: string
-                      rating: number
-                      count: number
-                    },
-                  ) => (
-                    <CartItem key={item.id} {...item} />
-                  ),
-                )}
-              </ul>
-              <div className="summary_products">
-                <div className="total_products">
-                  Total: <span>{totalCount} item(s)</span>
-                </div>
-                <div className="summary_orders">
-                  Summary orders: <span>{totalPrice} $</span>
-                </div>
-              </div>
-              <div className="buttons_products">
-                <Link href="/">
-                  <button className="btn_goback">
-                    <i className="fa-solid fa-arrow-left" />
-                    GO BACK
-                  </button>
-                </Link>
-                <button className="btn_pay">
-                  PAY
-                  <i className="fa-solid fa-cart-shopping" />
-                </button>
+              <div onClick={onClickClear} className="clear_cart">
+                <i className="fa-solid fa-trash" />
+                Clear cart
               </div>
             </div>
+            <hr className="top_line" />
+            <ul className="cart_list_products">
+              {items.map(
+                (
+                  item: JSX.IntrinsicAttributes & {
+                    id: string
+                    title: string
+                    price: number
+                    image: string
+                    rating: number
+                    count: number
+                  },
+                ) => (
+                  <CartItem key={item.id} {...item} />
+                ),
+              )}
+            </ul>
+            <div className="summary_products">
+              <div className="total_products">
+                Total: <span>{totalCount} item(s)</span>
+              </div>
+              <div className="summary_orders">
+                Summary orders: <span>{totalPrice} $</span>
+              </div>
+            </div>
+            <div className="buttons_products">
+              <Link href="/">
+                <button className="btn_goback">
+                  <i className="fa-solid fa-arrow-left" />
+                  GO BACK
+                </button>
+              </Link>
+              <button className="btn_pay">
+                PAY
+                <i className="fa-solid fa-cart-shopping" />
+              </button>
+            </div>
           </div>
-        )}
-      </div>
-    </div>
+        </div>
+      )}
+    </>
   )
 }
 

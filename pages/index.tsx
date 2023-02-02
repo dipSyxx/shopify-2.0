@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import styles from './index.module.sass'
-import { Header } from 'elements/Header/Header'
 import { Catalog } from 'elements/Main/Catalog'
 import { Products } from 'elements/Main/Products'
 import Skeleton from 'elements/Skeleton/Skeleton'
@@ -74,39 +73,36 @@ export const Home = () => {
     isSearch.current = false
   }, [categoryId, sort.sortProperty, searchValue, currentPage])
 
-  const skeleton = [...new Array(6)].map((_, index) => <Skeleton key={index} />)
+  // const skeleton = [...new Array(6)].map((_, index) => <Skeleton key={index} />)
   const products = items && items.map((obj: any) => <Products key={obj.id} {...obj} />)
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.container}>
-        <Header />
-        <Catalog categoryId={categoryId} onClickCategory={onClickCategoryId} />
+    <>
+      <Catalog categoryId={categoryId} onClickCategory={onClickCategoryId} />
 
-        {status === 'error' ? (
-          <h1 style={{ textAlign: 'center', marginTop: '30px', marginBottom: '30px' }}>
-            Oops, failed to load products :(
-          </h1>
-        ) : (
-          <div className={styles.products_list}>
-            {status === 'loading' ? (
-              <>
-                <Loader />
-                <Loader />
-                <Loader />
-                <Loader />
-                <Loader />
-                <Loader />
-              </>
-            ) : (
-              products
-            )}
-          </div>
-        )}
+      {status === 'error' ? (
+        <h1 style={{ textAlign: 'center', marginTop: '30px', marginBottom: '30px' }}>
+          Oops, failed to load products :(
+        </h1>
+      ) : (
+        <div className={styles.products_list}>
+          {status === 'loading' ? (
+            <>
+              <Loader />
+              <Loader />
+              <Loader />
+              <Loader />
+              <Loader />
+              <Loader />
+            </>
+          ) : (
+            products
+          )}
+        </div>
+      )}
 
-        <Pagination currentPage={currentPage} onChangePage={onChangePage} />
-      </div>
-    </div>
+      <Pagination currentPage={currentPage} onChangePage={onChangePage} />
+    </>
   )
 }
 

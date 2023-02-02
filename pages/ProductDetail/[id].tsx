@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import styles from './ProductDetailstyle.module.sass'
-import { Header } from 'elements/Header/Header'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import Link from 'next/link'
@@ -49,72 +48,67 @@ export const ProductDetail = ({ title, image, price, rating }: ProductDetailProp
 
   return (
     <>
-      <div className={styles.wrapper}>
-        <div className={styles.container}>
-          <Header />
-          {!product ? (
-            <Loader />
-          ) : (
-            <>
-              <Link href="/">
-                <button className={styles.btn_backtoshop}>
-                  <i className="fa-solid fa-arrow-left" />
-                  GO BACK
-                </button>
-              </Link>
-              <div className={styles.header}>
-                <h1 className={styles.header_title}>{product?.title}</h1>
-                <div className={styles.header_subtitle}>
-                  <div className={styles.header_rate}>
-                    <i className="fa-solid fa-star" />
-                    <i className="fa-solid fa-star" />
-                    <i className="fa-solid fa-star" />
-                    <i className="fa-solid fa-star" />
-                    <i className="fa-solid fa-star" />
-                    <span>{product?.rating} rating</span>
-                  </div>
-                  <div className={styles.header_code}>
-                    <span>Code: </span>
-                    {id}
-                  </div>
+      {!product ? (
+        <Loader />
+      ) : (
+        <>
+          <Link href="/">
+            <button className={styles.btn_backtoshop}>
+              <i className="fa-solid fa-arrow-left" />
+              GO BACK
+            </button>
+          </Link>
+          <div className={styles.header}>
+            <h1 className={styles.header_title}>{product?.title}</h1>
+            <div className={styles.header_subtitle}>
+              <div className={styles.header_rate}>
+                <i className="fa-solid fa-star" />
+                <i className="fa-solid fa-star" />
+                <i className="fa-solid fa-star" />
+                <i className="fa-solid fa-star" />
+                <i className="fa-solid fa-star" />
+                <span>{product?.rating} rating</span>
+              </div>
+              <div className={styles.header_code}>
+                <span>Code: </span>
+                {id}
+              </div>
+            </div>
+          </div>
+          <div className={styles.product_block}>
+            <div className={styles.product_img}>
+              <img src={product?.image} alt="product" width={350} height={350} />
+            </div>
+            <div className={styles.description_block}>
+              <div className={styles.available_block}>
+                <div className={styles.available}>
+                  <i className="fa-solid fa-circle-check" />
+                  Available for sale
                 </div>
               </div>
-              <div className={styles.product_block}>
-                <div className={styles.product_img}>
-                  <img src={product?.image} alt="product" width={350} height={350} />
+              <div className={styles.price_block}>
+                <div className={styles.price_cost}>
+                  {product?.price}
+                  <span>$</span>
                 </div>
-                <div className={styles.description_block}>
-                  <div className={styles.available_block}>
-                    <div className={styles.available}>
-                      <i className="fa-solid fa-circle-check" />
-                      Available for sale
-                    </div>
-                  </div>
-                  <div className={styles.price_block}>
-                    <div className={styles.price_cost}>
-                      {product?.price}
-                      <span>$</span>
-                    </div>
-                    {addedCount > 0 ? (
-                      <Link className={styles.into_cart} href="/CartPage/CartPage">
-                        <i className="fa-solid fa-basket-shopping" />
-                        In your cart{addedCount > 0 && <span>{addedCount}</span>}
-                      </Link>
-                    ) : (
-                      <Link href="/" className={styles.btn_buy}>
-                        <i className="fa-solid fa-cart-shopping" />
-                        Buy
-                      </Link>
-                    )}
-                  </div>
-                  <div className={styles.description_title}>Description</div>
-                  <div className={styles.description_text}>{product?.description}</div>
-                </div>
+                {addedCount > 0 ? (
+                  <Link className={styles.into_cart} href="/CartPage/CartPage">
+                    <i className="fa-solid fa-basket-shopping" />
+                    In your cart{addedCount > 0 && <span>{addedCount}</span>}
+                  </Link>
+                ) : (
+                  <Link href="/" className={styles.btn_buy}>
+                    <i className="fa-solid fa-cart-shopping" />
+                    Buy
+                  </Link>
+                )}
               </div>
-            </>
-          )}
-        </div>
-      </div>
+              <div className={styles.description_title}>Description</div>
+              <div className={styles.description_text}>{product?.description}</div>
+            </div>
+          </div>
+        </>
+      )}
     </>
   )
 }
