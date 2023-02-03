@@ -14,12 +14,34 @@ type PopupClick = MouseEvent & {
   path: Node[]
 }
 
+//? Закриття попапа по кліку на будь яку область крім його самого
+export const useOnClickOutside = (ref: any, handler: any) => {
+  useEffect(() => {
+    const listener = (event: any) => {
+      if (!ref.current || ref.current.contains(event.target)) {
+        return
+      }
+
+      handler(event)
+    }
+
+    document.addEventListener('mousedown', listener)
+    document.addEventListener('touchstart', listener)
+
+    return () => {
+      document.removeEventListener('mousedown', listener)
+      document.removeEventListener('touchstart', listener)
+    }
+  }, [ref, handler])
+}
+
 export const Sort = () => {
   const dispatch = useDispatch()
   const sort: any = useSelector<any>(selectFilterSort)
   const sortRef = useRef<HTMLDivElement>(null)
 
   const [sortPopOpen, setSortPopOpen] = useState(false)
+  useOnClickOutside(sortRef, () => setSortPopOpen(false))
 
   const onClickSortItem = (obj: any) => {
     dispatch(setSort(obj))
