@@ -15,6 +15,7 @@ export const Search = () => {
     inputRef.current?.focus()
   }
 
+  //? затримка запроса fetch в input
   const updateSearchValue = useCallback(
     debounce((str) => {
       dispatch(setSearchValue(str))

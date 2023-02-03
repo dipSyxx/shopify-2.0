@@ -3,7 +3,12 @@ import { Sort } from './Sort'
 import styles from './Catalog.module.sass'
 import clsx from 'clsx'
 
-export const Catalog = ({ categoryId, onClickCategory }: any) => {
+type CatalogProps = {
+  categoryId: number
+  onClickCategory: (i: any) => void
+}
+
+export const Catalog = ({ categoryId, onClickCategory }: CatalogProps) => {
   const category = ['All', "Men's clothing", "Women's clothing", 'Jewelery', 'Electronics']
   const categoryTitle = category[categoryId]
   return (

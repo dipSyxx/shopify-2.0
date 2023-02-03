@@ -9,7 +9,7 @@ export const CartPage = () => {
   const { totalPrice, items }: any = useSelector<any>(selectCart)
   const dispatch = useDispatch()
 
-  const totalCount = items.reduce((sum: any, item: { count: any }) => sum + item.count, 0)
+  const totalCount = items.reduce((sum: number, item: { count: number }) => sum + item.count, 0)
 
   const onClickClear = () => {
     if (window.confirm('Are you sure you want clear all products in your cart?')) {

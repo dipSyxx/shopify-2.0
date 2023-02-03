@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { FC, useCallback, useEffect, useRef, useState } from 'react'
 import styles from './index.module.sass'
 import { Catalog } from 'elements/Main/Catalog'
 import { Products } from 'elements/Main/Products'
@@ -13,7 +13,7 @@ import { sortItem } from 'elements/Main/Sort'
 import { AppDispatch } from 'redux/store'
 import { Loader } from 'elements/Loader/Loader'
 
-export const Home = () => {
+export const Home: FC = () => {
   const { categoryId, sort, currentPage, searchValue }: any = useSelector<any>(selectFilter)
   const { items, status }: any = useSelector<any>(selectProduct)
 

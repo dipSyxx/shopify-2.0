@@ -10,15 +10,13 @@ export const sortItem = [
   { name: 'alphabet', sortProperty: 'title' },
 ]
 
-type PopupClick = MouseEvent & {
-  path: Node[]
-}
+type Handler = (event: MouseEvent) => void
 
 //? Закриття попапа по кліку на будь яку область крім його самого
-export const useOnClickOutside = (ref: any, handler: any) => {
+export const useOnClickOutside = (ref: any, handler: Handler) => {
   useEffect(() => {
     const listener = (event: any) => {
-      if (!ref.current || ref.current.contains(event.target)) {
+      if (!ref.current || ref.current.contains(event.target as Node)) {
         return
       }
 

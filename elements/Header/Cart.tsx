@@ -7,7 +7,7 @@ import { selectCart } from 'redux/slices/cartSlice'
 export const Cart = () => {
   const { totalPrice, items }: any = useSelector<any>(selectCart)
 
-  const totalCount = items.reduce((sum: any, item: { count: any }) => sum + item.count, 0)
+  const totalCount = items.reduce((sum: number, item: { count: number }) => sum + item.count, 0)
   return (
     <>
       <Link href="/CartPage/CartPage">
