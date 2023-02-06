@@ -10,12 +10,14 @@ export const sortItem = [
   { name: 'alphabet', sortProperty: 'title' },
 ]
 
-type Handler = (event: MouseEvent) => void
+type Handler = (event: Event) => void
+
+type Event = MouseEvent | TouchEvent
 
 //? Закриття попапа по кліку на будь яку область крім його самого
-export const useOnClickOutside = (ref: any, handler: Handler) => {
+export const useOnClickOutside = <T extends HTMLElement = HTMLElement>(ref: React.RefObject<T>, handler: Handler) => {
   useEffect(() => {
-    const listener = (event: any) => {
+    const listener = (event: Event) => {
       if (!ref.current || ref.current.contains(event.target as Node)) {
         return
       }
@@ -41,7 +43,7 @@ export const Sort = () => {
   const [sortPopOpen, setSortPopOpen] = useState(false)
   useOnClickOutside(sortRef, () => setSortPopOpen(false))
 
-  const onClickSortItem = (obj: any) => {
+  const onClickSortItem = (obj: { name: string; sortProperty: string }) => {
     dispatch(setSort(obj))
     setSortPopOpen(false)
   }

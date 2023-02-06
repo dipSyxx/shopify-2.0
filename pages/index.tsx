@@ -4,25 +4,25 @@ import { Catalog } from 'elements/Main/Catalog'
 import { Products } from 'elements/Main/Products'
 import Skeleton from 'elements/Skeleton/Skeleton'
 import { Pagination } from 'elements/Pagination/Pagination'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { selectFilter, setCategoryId, setCurrentPage, setFilters } from 'redux/slices/filterSlice'
-import { fetchProducts, selectProduct } from 'redux/slices/productSlice'
+import { Status, fetchProducts, selectProduct } from 'redux/slices/productSlice'
 import qs from 'qs'
 import { useRouter } from 'next/router'
 import { sortItem } from 'elements/Main/Sort'
-import { AppDispatch } from 'redux/store'
+import { useAppDispatch } from 'redux/store'
 import { Loader } from 'elements/Loader/Loader'
 
 export const Home: FC = () => {
   const { categoryId, sort, currentPage, searchValue }: any = useSelector<any>(selectFilter)
   const { items, status }: any = useSelector<any>(selectProduct)
 
-  const dispatch = useDispatch<AppDispatch>()
+  const dispatch = useAppDispatch()
   const router = useRouter()
   const isSearch = useRef(false)
   const isMounted = useRef(false)
 
-  const onClickCategoryId = useCallback((id: string) => {
+  const onClickCategoryId = useCallback((id: number) => {
     dispatch(setCategoryId(id))
   }, [])
 
@@ -74,19 +74,23 @@ export const Home: FC = () => {
   }, [categoryId, sort.sortProperty, searchValue, currentPage])
 
   // const skeleton = [...new Array(6)].map((_, index) => <Skeleton key={index} />)
-  const products = items && items.map((obj: any) => <Products key={obj.id} {...obj} />)
+  const products =
+    items &&
+    items.map((obj: { id: string; title: string; image: string; price: number; rating: number }) => (
+      <Products key={obj.id} {...obj} />
+    ))
 
   return (
     <>
       <Catalog categoryId={categoryId} onClickCategory={onClickCategoryId} />
 
-      {status === 'error' ? (
+      {status === Status.ERROR ? (
         <h1 style={{ textAlign: 'center', marginTop: '30px', marginBottom: '30px' }}>
           Oops, failed to load products :(
         </h1>
       ) : (
         <div className={styles.products_list}>
-          {status === 'loading' ? (
+          {status === Status.LOADING ? (
             <>
               <Loader />
               <Loader />

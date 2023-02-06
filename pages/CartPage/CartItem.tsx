@@ -4,6 +4,7 @@ import { MinusItem, removeItem, addItem } from 'redux/slices/cartSlice'
 import { useDispatch } from 'react-redux'
 import { CartItem as CartItemType } from 'redux/slices/cartSlice'
 import Link from 'next/link'
+import clsx from 'clsx'
 
 type CartItemProps = {
   id: string
@@ -58,13 +59,17 @@ export const CartItem = ({ id, title, image, price, rating, count }: CartItemPro
         </div>
 
         <div className="added_product">
-          <div className="decriment_products" onClick={onClickMinus}>
+          <button
+            disabled={count === 1}
+            className={clsx('decriment_products', count === 1 ? 'disabled' : '')}
+            onClick={onClickMinus}
+          >
             -
-          </div>
+          </button>
           <div className="count_products">{count}</div>
-          <div className="incriment_products" onClick={onClickPlus}>
+          <button className="incriment_products" onClick={onClickPlus}>
             +
-          </div>
+          </button>
         </div>
         <div className="price_product">{price * count} $</div>
         <div className="delete_product" onClick={onClickRemove}>

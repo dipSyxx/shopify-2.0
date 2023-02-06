@@ -1,11 +1,18 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
+import { RootState } from 'redux/store'
+
+export enum Status {
+  LOADING = 'loading',
+  SUCCESS = 'success',
+  ERROR = 'error',
+}
 
 export type Product = {
   id: string
   title: string
   price: number
-  imageUrl: string
+  image: string
   rating: number
 }
 
@@ -20,7 +27,7 @@ export const fetchProducts = createAsyncThunk<Product[], SearchProductParams>(
   'product/fetchProductsStatus',
   async (params) => {
     const { category, sortBy, search, currentPage } = params
-    const { data } = await axios.get(
+    const { data } = await axios.get<Product[]>(
       `https://63adace43e4651691660ef2d.mockapi.io/items?page=${currentPage}&limit=6&${category}&sortBy=${sortBy}&order=desc${search} `,
     )
     return data
@@ -28,13 +35,13 @@ export const fetchProducts = createAsyncThunk<Product[], SearchProductParams>(
 )
 
 export interface ProductState {
-  items: []
+  items: Product[]
   status: string
 }
 
 const initialState: ProductState = {
   items: [],
-  status: 'loading',
+  status: Status.LOADING,
 }
 
 export const ProductSlice = createSlice({
@@ -45,24 +52,25 @@ export const ProductSlice = createSlice({
       state.items = action.payload
     },
   },
-  extraReducers: {
-    [fetchProducts.pending.toString()]: (state) => {
-      state.status = 'loading'
+
+  extraReducers: (builder) => {
+    builder.addCase(fetchProducts.pending, (state) => {
+      state.status = Status.LOADING
       state.items = []
-    },
-    [fetchProducts.fulfilled.toString()]: (state, action: PayloadAction<any>) => {
+    })
+    builder.addCase(fetchProducts.fulfilled, (state, action) => {
       state.items = action.payload
-      state.status = 'success'
-    },
-    [fetchProducts.rejected.toString()]: (state, action: PayloadAction<any>) => {
-      state.status = 'error'
+      state.status = Status.SUCCESS
+    })
+    builder.addCase(fetchProducts.rejected, (state) => {
+      state.status = Status.ERROR
       state.items = []
-    },
+    })
   },
 })
 
 //! selectors
-export const selectProduct = (state: any) => state.product
+export const selectProduct = (state: RootState) => state.product
 
 export const { setItems } = ProductSlice.actions
 

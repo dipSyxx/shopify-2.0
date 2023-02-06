@@ -5,7 +5,7 @@ import clsx from 'clsx'
 
 type CatalogProps = {
   categoryId: number
-  onClickCategory: (i: any) => void
+  onClickCategory: (i: number) => void
 }
 
 export const Catalog = ({ categoryId, onClickCategory }: CatalogProps) => {

@@ -62,10 +62,10 @@ export const ProductDetail = ({ title, image, price, rating }: ProductDetailProp
             <h1 className={styles.header_title}>{product?.title}</h1>
             <div className={styles.header_subtitle}>
               <div className={styles.header_rate}>
-                <i className="fa-solid fa-star" />
-                <i className="fa-solid fa-star" />
-                <i className="fa-solid fa-star" />
-                <i className="fa-solid fa-star" />
+                {product.rating > 1.9 ? <i className="fa-solid fa-star" /> : ''}
+                {product.rating > 2.9 ? <i className="fa-solid fa-star" /> : ''}
+                {product.rating > 3.9 ? <i className="fa-solid fa-star" /> : ''}
+                {product.rating > 4.8 ? <i className="fa-solid fa-star" /> : ''}
                 <i className="fa-solid fa-star" />
                 <span>{product?.rating} rating</span>
               </div>
