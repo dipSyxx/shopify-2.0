@@ -1,5 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { RootState } from 'redux/store'
+import { calcTotalPrice } from 'utils/calcTotalPrice'
+//? localStorage
+import { getCartFromLS } from 'utils/getCartFromLS'
 
 export type CartItem = {
   id: string | string[] | undefined
@@ -15,6 +18,9 @@ export interface CartSliceState {
   totalPrice: number
   items: CartItem[]
 }
+
+//? localStorage
+// const { items, totalPrice } = getCartFromLS()
 
 const initialState: CartSliceState = {
   totalPrice: 0,
@@ -36,10 +42,8 @@ export const cartSlice = createSlice({
           count: 1,
         })
       }
-      //! Вичеслення суми товарів
-      state.totalPrice = state.items.reduce((sum, obj) => {
-        return obj.price * obj.count + sum
-      }, 0)
+      //! Вичеслення суми товарів (utils)
+      state.totalPrice = calcTotalPrice(state.items)
     },
 
     MinusItem(state, action: PayloadAction<CartItem>) {
@@ -48,16 +52,14 @@ export const cartSlice = createSlice({
       if (findItem) {
         findItem.count--
       }
-      state.totalPrice = state.items.reduce((sum, obj) => {
-        return obj.price * obj.count + sum
-      }, 0)
+      //! Вичеслення суми товарів (utils)
+      state.totalPrice = calcTotalPrice(state.items)
     },
 
     removeItem(state, action) {
       state.items = state.items.filter((obj) => obj.id !== action.payload)
-      state.totalPrice = state.items.reduce((sum, obj) => {
-        return obj.price * obj.count + sum
-      }, 0)
+      //! Вичеслення суми товарів (utils)
+      state.totalPrice = calcTotalPrice(state.items)
     },
 
     clearItems(state) {

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { FC, useEffect, useRef, useState } from 'react'
 import styles from './Catalog.module.sass'
 import clsx from 'clsx'
 import { useDispatch, useSelector } from 'react-redux'
@@ -35,7 +35,7 @@ export const useOnClickOutside = <T extends HTMLElement = HTMLElement>(ref: Reac
   }, [ref, handler])
 }
 
-export const Sort = () => {
+export const Sort: FC = React.memo(() => {
   const dispatch = useDispatch()
   const sort: any = useSelector<any>(selectFilterSort)
   const sortRef = useRef<HTMLDivElement>(null)
@@ -47,20 +47,6 @@ export const Sort = () => {
     dispatch(setSort(obj))
     setSortPopOpen(false)
   }
-
-  // //? Закриття попапа по кліку на будь яку область крім його самого
-  // useEffect(() => {
-  //   const handleClickOutside = (event: MouseEvent) => {
-  //     const _event = event as PopupClick
-  //     if (sortRef.current && !_event.path.includes(sortRef.current)) {
-  //       setSortPopOpen(false)
-  //     }
-  //   }
-  //   document.body.addEventListener('click', handleClickOutside)
-
-  //   //! Видалення івент лісенера з body коли компонент <Sort /> зникає з поля зору
-  //   return () => document.body.removeEventListener('click', handleClickOutside)
-  // }, [])
 
   return (
     <>
@@ -88,4 +74,4 @@ export const Sort = () => {
       </div>
     </>
   )
-}
+})

@@ -22,6 +22,7 @@ export const Home: FC = () => {
   const isSearch = useRef(false)
   const isMounted = useRef(false)
 
+  //! Не переобновляється catalog тому що використовуємо useCallback
   const onClickCategoryId = useCallback((id: number) => {
     dispatch(setCategoryId(id))
   }, [])

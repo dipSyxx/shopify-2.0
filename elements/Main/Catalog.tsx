@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { FC, useState } from 'react'
 import { Sort } from './Sort'
 import styles from './Catalog.module.sass'
 import clsx from 'clsx'
@@ -8,7 +8,7 @@ type CatalogProps = {
   onClickCategory: (i: number) => void
 }
 
-export const Catalog = ({ categoryId, onClickCategory }: CatalogProps) => {
+export const Catalog: FC<CatalogProps> = React.memo(({ categoryId, onClickCategory }) => {
   const category = ['All', "Men's clothing", "Women's clothing", 'Jewelery', 'Electronics']
   const categoryTitle = category[categoryId]
   return (
@@ -26,4 +26,4 @@ export const Catalog = ({ categoryId, onClickCategory }: CatalogProps) => {
       <h1 className={styles.category_title}>{categoryTitle}:</h1>
     </>
   )
-}
+})

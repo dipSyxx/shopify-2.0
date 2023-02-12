@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import styles from './Header.module.sass'
 import Link from 'next/link'
 import { useSelector } from 'react-redux'
@@ -8,6 +8,18 @@ export const Cart = () => {
   const { totalPrice, items }: any = useSelector<any>(selectCart)
 
   const totalCount = items.reduce((sum: number, item: { count: number }) => sum + item.count, 0)
+
+  //? localStorage
+  // const isMounted = useRef(false)
+
+  // useEffect(() => {
+  //   if (isMounted.current) {
+  //     const json = JSON.stringify(items)
+  //     localStorage.setItem('cart', json)
+  //   }
+  //   isMounted.current = true
+  // }, [items])
+
   return (
     <>
       <Link href="/CartPage/CartPage">
