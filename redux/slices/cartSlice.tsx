@@ -1,7 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { RootState } from 'redux/store'
 import { calcTotalPrice } from 'utils/calcTotalPrice'
-//? localStorage
 import { getCartFromLS } from 'utils/getCartFromLS'
 
 export type CartItem = {
@@ -19,8 +18,8 @@ export interface CartSliceState {
   items: CartItem[]
 }
 
-//? localStorage
-// const { items, totalPrice } = getCartFromLS()
+//?! localStorage
+// const {items, totalPrice} = getCartFromLS()
 
 const initialState: CartSliceState = {
   totalPrice: 0,
