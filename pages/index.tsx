@@ -74,7 +74,7 @@ export const Home: FC = () => {
     isSearch.current = false
   }, [categoryId, sort.sortProperty, searchValue, currentPage])
 
-  // const skeleton = [...new Array(6)].map((_, index) => <Skeleton key={index} />)
+  const skeleton = [...new Array(6)].map((_, index) => <Skeleton key={index} />)
   const products =
     items &&
     items.map((obj: { id: string; title: string; image: string; price: number; rating: number }) => (
